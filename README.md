@@ -1,5 +1,15 @@
 # Infer an image for a given URL
 
+```
+pip install urlimage
+```
+
+```
+from urlimage import get_image_for_url
+
+print(get_image_for_url("https://www.mozilla.org"))
+```
+
 ## What this does:
 
 Given the URL of a website (e.g. "https://www.mozilla.org"), it attempts to find the most appropriate image that represents this site, and returns the URL of that image.
@@ -8,7 +18,7 @@ Given the URL of a website (e.g. "https://www.mozilla.org"), it attempts to find
 
 The HTML of the page is parsed (BeautifulSoup) and meta/link tags are extracted which may contain clues as to which image to use. Failing this, the favicon is tried, or else it searches for the first img tag following the first h1 on the page.
 
-The default search order is:
+The default order in which images are checked is:
 
 ```
 DEFAULT_CHECK_ORDER = [
@@ -24,6 +34,8 @@ DEFAULT_CHECK_ORDER = [
     FAV_ICON,
     FIRST_IMAGE,
 ]
+
+get_image_for_url(url, check_order=DEFAULT_CHECK_ORDER)
 ```
 
 Which corresponds to:
